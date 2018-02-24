@@ -1,0 +1,13 @@
+{
+  "pages": [
+    "pages/index/launch",
+    "pages/index/index",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "圆圆天气",
+    "navigationBarTextStyle": "black"
+  }
+}

@@ -1,0 +1,4 @@
+<!--pages/index/launch.wxml-->
+<view class='wrap'>
+  <image src="../../resources/images/launch.jpg"></image>
+</view>

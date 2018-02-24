@@ -1,0 +1,9 @@
+/* pages/index/launch.wxss */
+image {
+  width: 750rpx;
+  height: 1180rpx;
+}
+
+page {
+  background-color: #2e8bfc
+}
