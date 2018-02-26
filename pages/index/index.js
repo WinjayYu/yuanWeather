@@ -52,7 +52,7 @@
 //     })
 //   }
 // })
-
+const api = require('../../utils/api.js');
 const app = getApp();
 
 Page({
@@ -60,16 +60,48 @@ Page({
     weatherData: '',
     weatherIcon: 0,
     forecastData: '',
-    dailyText: ['今天', '明天', '后天']
+    dailyText: ['今天', '明天', '后天'],
+    lon: '',
+    lat: '',
   },
-  onLoad: function() {
-    console.log('app.globalData.weatherData', app.globalData)    
-    if (app.globalData.forecastData) {
-console.log(222);      
-      this.setData({
-        weatherData: app.globalData.weatherData,
-        forecastData: app.globalData.forecastData,
-      })
+  onLoad: function(option) { 
+    console.log('option',option);
+    if(option.loc) {
+      this.queryData(option.loc)
+    } else {
+      var location = app.globalData.latitude + ':' + app.globalData.longitude;
+      this.queryData(location)
     }
+  },
+  queryData: function(location) {
+    api.getCurrentDay(location)
+      .then(res => {
+        if (res) {
+          this.setData({
+            weatherData: res
+          });
+          api.getForecastDay(location)
+            .then(forRes => {
+              if (forRes) {
+                this.setData({
+                  forecastData: forRes
+                })
+              } else {
+                wx.showModal({
+                  title: '获取数据失败',
+                })
+              }
+            })
+        } else {
+          wx.showModal({
+            title: '获取数据失败',
+          })
+        }
+      })
+  },
+  goToCitys: function(e) {
+    wx.navigateTo({
+      url: 'citys'
+    })
   }
 })

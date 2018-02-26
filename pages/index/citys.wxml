@@ -1,0 +1,13 @@
+<!--pages/index/citys.wxml-->
+<view class='wrap'>
+  <view class='current-city'>
+    <view class='little-title'>当前城市</view>
+    <view class='city-name'>武汉</view>
+  </view>
+  <view class='hot-citys'>
+    <view class='little-title'>热门城市</view>
+    <view class='hot-citys-group'>
+      <view wx:for='{{hotCitys}}' data-city='{{item}}' wx:key="unique" bindtap='goToHome' class='city-name'>{{item}}</view>
+    </view>
+  </view>
+</view>

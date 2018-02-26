@@ -15,6 +15,7 @@
 <view class='wrap'>
     <view wx:if="{{forecastData}}" class='body-data'>
       <view class='current-day'>
+        <image class='menu' src="../../resources/images/menu.png" bindtap='goToCitys'></image>
         <view class='current-day-top'>
           <view class='cityName'>{{weatherData[0].location.name}}</view>
           <view class='temperature'>{{weatherData[0].now.temperature}}°</view>
@@ -25,7 +26,7 @@
       </view>
 
       <view class='forecast'>
-        <view wx:for="{{forecastData[0].daily}}" class='forecast-item'>
+        <view wx:for="{{forecastData[0].daily}}" wx:key="unique" class='forecast-item'>
           <view class='option-day'>{{dailyText[index]}}</view>
           <view class='weather-detail-group'>
             <view class='weather-detail detail-first'>
@@ -39,30 +40,6 @@
           </view>
           <view class='temperature'>{{forecastData[0].daily[index].high}}/{{forecastData[0].daily[index].low}}°C</view>
         </view>
-        <!-- <view class='forecast-item'>
-          <view class='option-day'>明天</view>
-          <view class='weather-detail'>
-            <image src="http://s3.sencdn.com/web/icons/3d_50/7.png"></image>
-            <text>晴转多云 | 优</text>
-          </view>
-          <view class='temperature'>16/4°C</view>
-        </view>
-        <view class='forecast-item'>
-          <view class='option-day'>后天</view>
-          <view class='weather-detail'>
-            <image src="http://s3.sencdn.com/web/icons/3d_50/7.png"></image>
-            <text>晴转多云 | 优</text>
-          </view>
-          <view class='temperature'>16/4°C</view>
-        </view>
-        <view class='forecast-item'>
-          <view class='option-day'>今天</view>
-          <view class='weather-detail'>
-            <image src="http://s3.sencdn.com/web/icons/3d_50/7.png"></image>
-            <text>晴转多云 | 优</text>
-          </view>
-          <view class='temperature'>16/4°C</view>
-        </view> -->
       </view>
      
     </view>

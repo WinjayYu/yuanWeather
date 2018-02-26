@@ -1,0 +1,27 @@
+/* pages/index/citys.wxss */
+.little-title{
+  font-size:25rpx;
+  color:#999;
+  margin-left: 16rpx;
+  margin-bottom:10rpx;
+}
+
+.city-name {
+  width:234rpx;
+  background-color:#eee;
+  height:58rpx;
+  text-align:center;
+  font-size:30rpx;
+  line-height:58rpx;
+  border-radius:10rpx;
+  margin:8rpx;
+}
+
+.hot-citys {
+  margin-top: 20rpx;
+}
+
+.hot-citys-group {
+  display: flex;
+  flex-wrap:wrap;
+}
