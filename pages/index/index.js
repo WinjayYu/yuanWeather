@@ -1,82 +1,62 @@
-// //index.js
-// //获取应用实例
-// const app = getApp()
 
-// Page({
-//   data: {
-//     motto: 'Hello World',
-//     userInfo: {},
-//     hasUserInfo: false,
-//     canIUse: wx.canIUse('button.open-type.getUserInfo')
-//   },
-//   //事件处理函数
-//   bindViewTap: function() {
-//     wx.navigateTo({
-//       url: '../logs/logs'
-//     })
-//   },
-//   onLoad: function () {
-//     if (app.globalData.userInfo) {
-//       this.setData({
-//         userInfo: app.globalData.userInfo,
-//         hasUserInfo: true
-//       })
-//     } else if (this.data.canIUse){
-//       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-//       // 所以此处加入 callback 以防止这种情况
-//       app.userInfoReadyCallback = res => {
-//         this.setData({
-//           userInfo: res.userInfo,
-//           hasUserInfo: true
-//         })
-//       }
-//     } else {
-//       // 在没有 open-type=getUserInfo 版本的兼容处理
-//       wx.getUserInfo({
-//         success: res => {
-//           app.globalData.userInfo = res.userInfo
-//           this.setData({
-//             userInfo: res.userInfo,
-//             hasUserInfo: true
-//           })
-//         }
-//       })
-//     }
-//   },
-//   getUserInfo: function(e) {
-//     console.log(e)
-//     app.globalData.userInfo = e.detail.userInfo
-//     this.setData({
-//       userInfo: e.detail.userInfo,
-//       hasUserInfo: true
-//     })
-//   }
-// })
 const api = require('../../utils/api.js');
 const app = getApp();
 
 Page({
   data: {
-    weatherData: '',
+    weatherData: '', // 当天数据
     weatherIcon: 0,
-    forecastData: '',
-    dailyText: ['今天', '明天', '后天'],
+    forecastData: '', // 预测
+    dailyText: ['今天',  '明天', '后天'],
     lon: '',
     lat: '',
+    suggestionData: '', // 建议
+    suggNameArr: {
+      car_washing: '洗车',
+      dressing: '穿衣',
+      flu: '感冒',
+      sport: '运动',
+      travel: '旅游',
+      uv: '紫外线'
+    },
+    suggNameKeys:[],
   },
+  
+  onShareAppMessage: function() {
+    return {
+      title: '向朋友分享圆圆天气',
+      path:'index',
+      success: function(res) {
+        wx.showModal({
+          title: '转发成功',
+          content: '',
+        })
+      },
+      fail: function (res) {
+        wx.showModal({
+          title: '转发失败',
+          content: '',
+        })
+      }
+    }
+  },
+
   onLoad: function(option) { 
-    console.log('option',option);
     if(option.loc) {
       this.queryData(option.loc)
     } else {
       var location = app.globalData.latitude + ':' + app.globalData.longitude;
-      this.queryData(location)
+      this.queryData(location, 1)
     }
   },
-  queryData: function(location) {
+  queryData: function(location, type) {
     api.getCurrentDay(location)
       .then(res => {
         if (res) {
+          app.globalData.weatherData = res;
+          if(type) {
+            app.globalData.locationCity = res[0].location.name;
+          }
           this.setData({
             weatherData: res
           });
@@ -85,19 +65,41 @@ Page({
               if (forRes) {
                 this.setData({
                   forecastData: forRes
+                });
+                api.getSuggestion(location)
+                .then(suggRes => {
+                  if (suggRes) {
+                    this.setData({
+                      suggestionData: suggRes[0].suggestion,
+                      suggNameKeys: Object.keys(suggRes[0].suggestion)
+                    })
+                  }
                 })
               } else {
                 wx.showModal({
-                  title: '获取数据失败',
+                  title: '暂无此城市数据',
+                  showCancel: false,
+                  complete: function () {
+                    wx.redirectTo({
+                      url: 'citys',
+                    })
+                  }
                 })
               }
             })
         } else {
           wx.showModal({
-            title: '获取数据失败',
+            title: '暂无此城市数据',
+            showCancel: false,
+            complete: function() {
+              wx.redirectTo({
+                url: 'citys',
+              })
+            }
           })
+          return;
         }
-      })
+    })
   },
   goToCitys: function(e) {
     wx.navigateTo({

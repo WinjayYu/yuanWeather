@@ -44,6 +44,7 @@
   height:50rpx;
   position:absolute;
   right:20rpx;
+  animation: jello 1s 5s 1 linear;
 }
 
 .wind-group {
@@ -74,7 +75,11 @@
   justify-content: space-between;
   height: 150rpx;
   align-items: center;
-  border-bottom: 1px #eee solid
+  border-bottom: 1px #eee solid;
+}
+
+.forecast .forecast-item:last-child {
+  border-bottom: none;
 }
 
 .forecast .forecast-item .weather-detail image {
@@ -100,4 +105,86 @@
 
 .forecast .weather-detail-text {
   margin-bottom: 10rpx;
+}
+
+.suggestion {
+  color: #000;
+  border-top: 30rpx #eee solid;
+}
+
+.suggestion .sugg_item_wrap {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap
+}
+
+.suggestion .sugg_item {
+  text-align:center;
+  height:180rpx;
+  border: 2rpx #eee solid;
+  width: 250rpx;
+  box-sizing:border-box;
+}
+
+.suggestion .sugg_item .sugg_name{
+  font-size: 30rpx;
+  color: #999;
+  margin-top: 5rpx;
+}
+
+.suggestion .sugg_item .sugg_title {
+  font-size: 35rpx;
+  margin-top: 45rpx;
+}
+
+.footer {
+  text-align: center;
+  font-size: 20rpx;
+  background-color: #eee;
+  color: #999;
+  padding: 22rpx 0;
+}
+
+@keyframes jello {
+  from,
+  11.1%,
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  22.2% {
+    -webkit-transform: skewX(-12.5deg) skewY(-12.5deg);
+    transform: skewX(-12.5deg) skewY(-12.5deg);
+  }
+
+  33.3% {
+    -webkit-transform: skewX(6.25deg) skewY(6.25deg);
+    transform: skewX(6.25deg) skewY(6.25deg);
+  }
+
+  44.4% {
+    -webkit-transform: skewX(-3.125deg) skewY(-3.125deg);
+    transform: skewX(-3.125deg) skewY(-3.125deg);
+  }
+
+  55.5% {
+    -webkit-transform: skewX(1.5625deg) skewY(1.5625deg);
+    transform: skewX(1.5625deg) skewY(1.5625deg);
+  }
+
+  66.6% {
+    -webkit-transform: skewX(-0.78125deg) skewY(-0.78125deg);
+    transform: skewX(-0.78125deg) skewY(-0.78125deg);
+  }
+
+  77.7% {
+    -webkit-transform: skewX(0.390625deg) skewY(0.390625deg);
+    transform: skewX(0.390625deg) skewY(0.390625deg);
+  }
+
+  88.8% {
+    -webkit-transform: skewX(-0.1953125deg) skewY(-0.1953125deg);
+    transform: skewX(-0.1953125deg) skewY(-0.1953125deg);
+  }
 }

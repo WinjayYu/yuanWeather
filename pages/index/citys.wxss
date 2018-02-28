@@ -1,4 +1,9 @@
 /* pages/index/citys.wxss */
+
+page {
+  margin-top: 90rpx;
+}
+
 .little-title{
   font-size:25rpx;
   color:#999;
@@ -6,15 +11,23 @@
   margin-bottom:10rpx;
 }
 
+.search-wrap {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  margin-left: -350rpx;
+}
+
 .city-name {
-  width:234rpx;
+  width:210rpx;
   background-color:#eee;
-  height:58rpx;
+  height:70rpx;
   text-align:center;
   font-size:30rpx;
-  line-height:58rpx;
+  line-height:70rpx;
   border-radius:10rpx;
-  margin:8rpx;
+  margin:20rpx;
+  animation: jello 1s 1 linear;
 }
 
 .hot-citys {
@@ -24,4 +37,81 @@
 .hot-citys-group {
   display: flex;
   flex-wrap:wrap;
+}
+
+input{
+  background-color: #eee;
+  width:700rpx;
+  border-radius:35rpx;
+  margin:0 auto 50rpx;
+  font-size:30rpx;
+  padding-left:30rpx;
+  height:70rpx;
+  line-height:70px;
+  box-sizing: border-box;
+}
+
+.search-result {
+  margin-top: 20rpx;
+  padding: 0 20rpx;
+}
+
+.search-result .search-item {
+  font-size: 35rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  border-bottom: 1px #eee solid;
+  padding-left:10px;
+
+}
+
+.no-data {
+  text-align: center;
+  font-size: 27rpx;
+  color: #999;
+}
+
+
+@keyframes jello {
+  from,
+  11.1%,
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  22.2% {
+    -webkit-transform: skewX(-12.5deg) skewY(-12.5deg);
+    transform: skewX(-12.5deg) skewY(-12.5deg);
+  }
+
+  33.3% {
+    -webkit-transform: skewX(6.25deg) skewY(6.25deg);
+    transform: skewX(6.25deg) skewY(6.25deg);
+  }
+
+  44.4% {
+    -webkit-transform: skewX(-3.125deg) skewY(-3.125deg);
+    transform: skewX(-3.125deg) skewY(-3.125deg);
+  }
+
+  55.5% {
+    -webkit-transform: skewX(1.5625deg) skewY(1.5625deg);
+    transform: skewX(1.5625deg) skewY(1.5625deg);
+  }
+
+  66.6% {
+    -webkit-transform: skewX(-0.78125deg) skewY(-0.78125deg);
+    transform: skewX(-0.78125deg) skewY(-0.78125deg);
+  }
+
+  77.7% {
+    -webkit-transform: skewX(0.390625deg) skewY(0.390625deg);
+    transform: skewX(0.390625deg) skewY(0.390625deg);
+  }
+
+  88.8% {
+    -webkit-transform: skewX(-0.1953125deg) skewY(-0.1953125deg);
+    transform: skewX(-0.1953125deg) skewY(-0.1953125deg);
+  }
 }

@@ -1,13 +1,22 @@
 <!--pages/index/citys.wxml-->
 <view class='wrap'>
-  <view class='current-city'>
-    <view class='little-title'>当前城市</view>
-    <view class='city-name'>武汉</view>
+  <view class='search-wrap'>
+    <input type='text' placeholder='城市名/拼音' bindinput='getkeyword'></input>
   </view>
-  <view class='hot-citys'>
-    <view class='little-title'>热门城市</view>
-    <view class='hot-citys-group'>
-      <view wx:for='{{hotCitys}}' data-city='{{item}}' wx:key="unique" bindtap='goToHome' class='city-name'>{{item}}</view>
+  <view wx:if='{{!searching}}'>
+    <view class='current-city'>
+      <view class='little-title'>当前定位城市</view>
+      <view class='city-name'>{{locationCity}}</view>
+    </view>
+    <view class='hot-citys'>
+      <view class='little-title'>热门城市</view>
+      <view class='hot-citys-group'>
+        <view wx:for='{{hotCitys}}' data-city='{{item}}' wx:key="unique" bindtap='goToHome' class='city-name'>{{item}}       </view>
+      </view>
     </view>
   </view>
+  <view wx:if="{{searchArr.length > 0 && searching}}" class='search-result'>
+    <view wx:for='{{searchArr}}' wx:key="unique" class='search-item' data-city='{{item.name}}' bindtap='goToHome'>{{item.name}}</view>
+  </view>
+  <view class='no-data' wx:if='{{searching && noData}}'>抱歉,没有找到任何结果！</view>
 </view>

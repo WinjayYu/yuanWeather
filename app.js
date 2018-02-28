@@ -8,7 +8,12 @@ App({
         self.globalData.latitude = locRes.latitude.toFixed(2);
 
         wx.redirectTo({
-          url: 'index'
+          url: 'index',
+          fail: function(e) {
+            wx.redirectTo({
+              url: 'pages/index/index'
+            })
+          }
         })
       },
       fail: function(err) {
@@ -23,6 +28,8 @@ App({
     weatherData: '',
     longitude: '',
     latitude: '',
-    forecastData: ''
+    forecastData: '',
+    cityJson: '',
+    locationCity: ''
   }
 })
